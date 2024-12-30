@@ -1,0 +1,59 @@
+// allprojects {
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
+// }
+
+// rootProject.buildDir = "../build"
+// subprojects {
+//     project.buildDir = "${rootProject.buildDir}/${project.name}"
+// }
+// subprojects {
+//     project.evaluationDependsOn(":app")
+// }
+
+// tasks.register("clean", Delete) {
+//     delete rootProject.buildDir
+// }
+
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal() // Required for Kotlin and other plugins
+    }
+    dependencies {
+        // Gradle and Kotlin plugins
+        classpath "com.android.tools.build:gradle:8.1.2" // Update to the latest stable version
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10" // Kotlin plugin
+        classpath "com.google.gms:google-services:4.3.13" // Firebase services
+        classpath "com.google.firebase:firebase-crashlytics-gradle:2.9.8" // Firebase Crashlytics
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.48"
+        
+         // Hilt for Dependency Injection
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' } // Add if you are using libraries from JitPack
+    }
+}
+
+rootProject.buildDir = "../build"
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
